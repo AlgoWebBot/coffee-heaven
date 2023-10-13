@@ -3,13 +3,11 @@ const app = express()
 const cors = require('cors')
 const port = process.env.PORT || 8081
 require('dotenv').config()
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 app.use(cors())
 app.use(express.json())
-console.log(process.env.DB_NAME)
-
 
 const uri = `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@shimulclaster1.85diumq.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -35,10 +33,24 @@ async function run() {
             res.send(allCoffee)
 
         })
+        app.get('/coffees/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) };
+            const coffee = await coffees.findOne(query);
+            res.send(coffee);
+
+        })
 
         app.post('/coffees', async (req, res) => {
             const coffee = req.body;
             const result = await coffees.insertOne(coffee);
+            res.send(result);
+        })
+
+        app.delete('/coffees/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) };
+            const result = await coffees.deleteOne(query);
             res.send(result);
         })
 

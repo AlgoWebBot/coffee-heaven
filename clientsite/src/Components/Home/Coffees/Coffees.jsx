@@ -2,9 +2,40 @@ import React, { useState } from 'react'
 import banner from '/images/more/1.png'
 import { AiFillEye } from 'react-icons/ai';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Coffees = ({ coffees }) => {
+
+    const navigate = useNavigate();
+
+    const deleteCoffee = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log(id)
+                fetch(`http://localhost:8081/coffees/${id}`, {
+                    method: "DELETE",
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        navigate('/');
+                    });
+            }
+        })
+    }
 
     return (
         <div className='min-h-screen w-full my-20' style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover' }}>
@@ -37,7 +68,7 @@ const Coffees = ({ coffees }) => {
                                     <AiFillEye className='bg-[#dcb889] h-10 w-10 p-2 rounded-lg text-white' />
                                 </Link>
                                 <MdModeEdit className='bg-[black] h-10 w-10 p-2 rounded-lg text-white' />
-                                <MdDelete className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white' />
+                                <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white' />
                             </div>
                         </div>
                     )
