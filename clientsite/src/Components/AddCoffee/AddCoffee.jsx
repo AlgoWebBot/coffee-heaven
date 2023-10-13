@@ -2,6 +2,7 @@ import React from 'react'
 import cover from '/images/more/11.png'
 import { BsArrowLeft } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 
 const AddCoffee = () => {
@@ -19,6 +20,23 @@ const AddCoffee = () => {
 
         const coffeDetails = { name, chef, supplier, taste, category, details, photoURL };
         console.log(coffeDetails)
+
+        fetch('http://localhost:8081/coffees', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(coffeDetails),
+        })
+            .then(res => res.json())
+            .then(data => {
+                form.reset();
+                Swal.fire(
+                    'Congratulations!',
+                    'Added Product Succeefully!',
+                    'success'
+                )
+            });
     }
     return (
         <div className='py-20' style={{ backgroundImage: `url(${cover})` }}>

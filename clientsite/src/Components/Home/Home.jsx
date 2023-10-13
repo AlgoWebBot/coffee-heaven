@@ -3,8 +3,12 @@ import banner from '/images/more/Rectangle2.png'
 import Coffees from './Coffees/Coffees'
 import FollowUs from './FollowUs/FollowUs'
 import AddCoffee from '../AddCoffee/AddCoffee'
+import { useLoaderData } from 'react-router-dom'
 
 const Home = () => {
+
+    const coffees = useLoaderData();
+
     return (
         <div>
             <div className='relative'>
@@ -47,7 +51,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <Coffees />
+            <Coffees coffees={coffees} />
             <FollowUs />
         </div>
     )
