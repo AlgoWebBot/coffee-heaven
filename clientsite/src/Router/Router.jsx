@@ -8,11 +8,13 @@ import CoffeeDetails from "../Components/CoffeeDetails/CoffeeDetails";
 import EditCoffee from "../Components/EditCoffe/EditCoffee";
 import Login from "../Components/Login/Login";
 import Registration from "../Components/Registration/Registration";
+import Error from "../Components/Error/Error";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
+        errorElement: <Error />,
         children: [
             {
                 path: '/',
