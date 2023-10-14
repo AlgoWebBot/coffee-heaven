@@ -63,11 +63,13 @@ const Coffees = ({ coffees }) => {
                                     <p><strong>Price: </strong>890 Taka</p>
                                 </div>
                             </div>
-                            <div className='text-3xl space-y-6'>
+                            <div className='text-3xl space-y-6 flex flex-col'>
                                 <Link to={`/coffees/${coffee._id}`}>
                                     <AiFillEye className='bg-[#dcb889] h-10 w-10 p-2 rounded-lg text-white' />
                                 </Link>
-                                <MdModeEdit className='bg-[black] h-10 w-10 p-2 rounded-lg text-white' />
+                                <Link to={`/edit/${coffee._id}`}>
+                                    <MdModeEdit className='bg-[black] h-10 w-10 p-2 rounded-lg text-white' />
+                                </Link>
                                 <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white' />
                             </div>
                         </div>
