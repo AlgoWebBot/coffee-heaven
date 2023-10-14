@@ -43,6 +43,7 @@ const EditCoffee = () => {
                     'Your file has been deleted.',
                     'success'
                 )
+                navigate('/')
             })
     }
 

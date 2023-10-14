@@ -70,7 +70,7 @@ const Coffees = ({ coffees }) => {
                                 <Link to={`/edit/${coffee._id}`}>
                                     <MdModeEdit className='bg-[black] h-10 w-10 p-2 rounded-lg text-white' />
                                 </Link>
-                                <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white' />
+                                <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white cursor-pointer' />
                             </div>
                         </div>
                     )
