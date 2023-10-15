@@ -6,7 +6,10 @@ export const MyContext = createContext(null);
 const AuthContext = ({ children }) => {
 
     const [user, setUser] = useState(null);
+    const [admin, setAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    console.log(admin)
 
     const passwordAuth = (email, password) => {
         setLoading(true)
@@ -42,6 +45,8 @@ const AuthContext = ({ children }) => {
     
     const contextValue = {
         user,
+        admin,
+        setAdmin,
         loading,
         passwordAuth,
         passwordLogin,

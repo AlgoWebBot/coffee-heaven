@@ -9,6 +9,7 @@ import EditCoffee from "../Components/EditCoffe/EditCoffee";
 import Login from "../Components/Login/Login";
 import Registration from "../Components/Registration/Registration";
 import Error from "../Components/Error/Error";
+import Private from "../Private/Private";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/addCoffee',
-                element: <AddCoffee />
+                element: <Private><AddCoffee /></Private>
             },
             {
                 path: '/coffees/:id',

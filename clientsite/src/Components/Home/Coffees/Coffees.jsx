@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import banner from '/images/more/1.png'
 import { AiFillEye } from 'react-icons/ai';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { MyContext } from '../../../Context/AuthContext';
 
 const Coffees = ({ coffees }) => {
 
     const navigate = useNavigate();
+    const { admin } = useContext(MyContext);
+    console.log(admin)
 
     const deleteCoffee = id => {
         Swal.fire({
@@ -67,10 +70,14 @@ const Coffees = ({ coffees }) => {
                                 <Link to={`/coffees/${coffee._id}`}>
                                     <AiFillEye className='bg-[#dcb889] h-10 w-10 p-2 rounded-lg text-white' />
                                 </Link>
-                                <Link to={`/edit/${coffee._id}`}>
-                                    <MdModeEdit className='bg-[black] h-10 w-10 p-2 rounded-lg text-white' />
-                                </Link>
-                                <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white cursor-pointer' />
+                                {
+                                    admin && <Link to={`/edit/${coffee._id}`}>
+                                        <MdModeEdit className='bg-[black] h-10 w-10 p-2 rounded-lg text-white' />
+                                    </Link>
+                                }
+                                {
+                                    admin && <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white cursor-pointer' />
+                                }
                             </div>
                         </div>
                     )
