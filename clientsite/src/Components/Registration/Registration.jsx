@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BsFacebook, BsArrowLeft } from 'react-icons/bs';
 import { AiFillGoogleCircle } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { MyContext } from '../../Context/AuthContext';
+import { updateProfile } from 'firebase/auth';
 
 const Registration = () => {
+
+    const { passwordAuth, googleLogin } = useContext(MyContext);
+    const navigate = useNavigate();
 
     const handleRegistration = (e) => {
         e.preventDefault();
@@ -11,10 +16,33 @@ const Registration = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
+
+        if (password !== confirmPassword) {
+            return console.log("Password didn't match.")
+        }
+
+        passwordAuth(email, password)
+            .then(res => {
+                const user = res.user;
+                updateProfile(user, {
+                    displayName: userName
+                })
+                    .then(res => console.log(user))
+                    .catch(err => console.log(err))
+                
+                e.target.reset();
+                navigate('/');
+            })
+            .catch(err => {
+                console.log(err)
+            });
     }
 
+
     const gooleSignIn = () => {
-        console.log('hello')
+        googleLogin()
+            .then(res => console.log(res.user))
+            .catch(err => console.log(err))
     }
 
   return (
