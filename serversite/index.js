@@ -26,13 +26,28 @@ async function run() {
         await client.connect();
         const database = client.db("coffeeHeavenDB");
         const coffees = database.collection("coffees");
+        const users = database.collection("users");
 
         app.get('/coffees', async (req, res) => {
             // const coffess = req.body
             const allCoffee = await coffees.find().toArray();
             res.send(allCoffee)
-
         })
+
+        app.get('/users', async (req, res) => {
+            const user = req.body
+            const allUsers = await users.find().toArray();
+            res.send(allUsers)
+            // res.send('All Users Here')
+        })
+
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            console.log(user)
+            const result = await users.insertOne(user);
+            res.send(result);
+        })
+
         app.get('/coffees/:id', async (req, res) => {
             const id = req.params.id
             const query = { _id: new ObjectId(id) };

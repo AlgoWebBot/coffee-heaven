@@ -9,7 +9,7 @@ import { MyContext } from '../../../Context/AuthContext';
 const Coffees = ({ coffees }) => {
 
     const navigate = useNavigate();
-    const { admin } = useContext(MyContext);
+    const { admin, user } = useContext(MyContext);
     console.log(admin)
 
     const deleteCoffee = id => {
@@ -71,12 +71,12 @@ const Coffees = ({ coffees }) => {
                                     <AiFillEye className='bg-[#dcb889] h-10 w-10 p-2 rounded-lg text-white' />
                                 </Link>
                                 {
-                                    admin && <Link to={`/edit/${coffee._id}`}>
+                                    user && <Link to={`/edit/${coffee._id}`}>
                                         <MdModeEdit className='bg-[black] h-10 w-10 p-2 rounded-lg text-white' />
                                     </Link>
                                 }
                                 {
-                                    admin && <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white cursor-pointer' />
+                                    user && <MdDelete onClick={() => deleteCoffee(coffee._id)} className='bg-[#EA4744] h-10 w-10 p-2 rounded-lg text-white cursor-pointer' />
                                 }
                             </div>
                         </div>

@@ -10,6 +10,7 @@ import Login from "../Components/Login/Login";
 import Registration from "../Components/Registration/Registration";
 import Error from "../Components/Error/Error";
 import Private from "../Private/Private";
+import Dashboard from "../Components/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
                 path: '/register',
                 element: <Registration />
             },
+            {
+                path: '/dashboard',
+                element: <Dashboard />
+            }
         ]
     }
 ])

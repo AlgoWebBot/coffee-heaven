@@ -18,7 +18,8 @@ const Login = () => {
         const password = e.target.password.value;
 
         if (adminPassword === 'coffeeheaven636') {
-            setAdmin(true)
+            // setAdmin(true)
+            console.log("admin")
         }
 
         passwordLogin(email, password)

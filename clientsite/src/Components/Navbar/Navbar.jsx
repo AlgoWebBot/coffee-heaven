@@ -19,10 +19,18 @@ const Navbar = () => {
   return (
     <div className='h-28 w-full flex justify-center items-center gap-4 relative' style={{ backgroundImage: `url(${navbanner})`, backgroundSize: 'cover' }}>
       <img src="/images/more/logo1.png" alt="" className='h-20' />
-      <h1 className='text-white text-5xl font-bold font-primary tracking-wide'>Coffee Heaven</h1>
+      <h1 className='text-white text-5xl font-bold font-primary tracking-wide'>
+        <Link to='/'>Coffee Heaven</Link>
+      </h1>
 
       <div className='flex justify-end items-center absolute right-32 gap-10'>
         <h1 className='text-white text-xl font-primary'>{user?.displayName}</h1>
+        {
+          user &&
+          <Link to='/dashboard'>
+            <button className='btn capitalize text-white bg-transparent input input-bordered border-white hover:bg-[#331A15] rounded-full'>Dashboard</button>
+          </Link>
+        }
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
